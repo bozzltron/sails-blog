@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+      <channel>
+        <title>Sails.js Blog</title>
+        <description></description>
+        <link>http://www.<%= host %>/rss</link>
+        <language>en</language>
+        <copyright>Sails.js Blog</copyright>
+        <atom:link href="http://www.<%= host %>/rss" rel="self" type="application/xml" />
+
+        <% _.each(posts, function(post){ %>
+        <item>
+          <title><%= post.title %></title>
+          <description><![CDATA[<%= post.body %>]]></description>
+          <link>http://www.<%= host %><%= post.link %></link>
+          <guid isPermaLink="true">http://www.<%= host %><%= post.link %></guid>
+          <pubDate><%= post.publishedDate %></pubDate>
+        </item>        
+        <% }); %>
+
+      </channel>
+    </rss>

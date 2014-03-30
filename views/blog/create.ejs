@@ -1,0 +1,90 @@
+<!-- Main body
+================== -->
+  <div class="wrapper">
+    <div class="section-header">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+		    <!-- Remove the .animated class if you don't want things to move -->
+			<h1 class="animated slideInLeft"><span>Blog</span></h1>
+		  </div>
+		</div>
+	  </div>
+    </div>
+	<div class="container">
+	  <div class="row">
+
+		<%  _.each(flash, function(message, type){ %>
+			<div class="alert alert-<%= type %>"><%= message %></div>
+		<% }); %>
+
+	    <!-- Contact us form -->
+		<div class="col-sm-6">
+		  <h2 class="hl top-zero">Create Blog</h2>
+		  <hr>
+		
+			<form role="form" action="/blog/create" method="POST">
+			  <input name="id" type="hidden" value="<%= post.id %>" />
+			  <div class="form-group">
+				<label for="title">Title</label>
+				<input type="text" class="form-control" id="title" placeholder="Enter title" value="<%= post.title %>" name="title" />
+			  </div>
+			  <div class="form-group">
+				<label for="name">Password</label>
+				<textarea class="form-control" rows="20" name="body" placeholder="Enter blog"><%= post.body %></textarea>
+			  </div>
+			  <div class="form-group">
+				<label for="tags">Tags</label>
+				<input type="text" class="form-control" id="tags" value="<% if(post.tags){ %><%= post.tags %><% } %>" placeholder="Example : hvac, lennox, savings" name="tags" />
+			  </div>
+			  <div class="form-group">
+				<label for="link">Link</label>
+				<input type="text" class="form-control" id="link" value="<% if(post.link){ %><%= post.link %><% } %>" name="link" />
+			  </div>			  
+			  <input type='hidden' name='_csrf' value='<%= _csrf %>' />
+			  <button type="submit" class="btn btn-primary">Save</button>
+			</form>
+	
+		</div>
+		<div class="col-sm-6">
+			<br />
+			<p>Markdown Syntax</p>
+			<pre>
+HEADERS 			
+
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+EMPHASIS
+
+Emphasis, aka italics, with *asterisks* or _underscores_.
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+Combined emphasis with **asterisks and _underscores_**.
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+LISTS
+
+1. First ordered list item
+2. Another item
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+
+LINKS
+
+[Link text](https://www.google.com)
+
+IMAGES
+
+(/path/to/img.jpg)
+			</pre>
+		</div>
+
+	  </div>
+	</div>
+  </div>

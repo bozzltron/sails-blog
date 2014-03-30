@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+        For demonstration purposes, the `title` is dynamically set here based on
+        your `sails.config.appName` to show that you can inject data into layouts
+        exactly the same way as with your other view templates.
+    -->
+    <title>Sails.js Blog</title>
+
+    <meta charset="utf-8">
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="alternate" type="application/rss+xml" title="Blog" href="/rss">
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <title>Sails.js Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/styles/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        margin-top:60px;
+      }
+    </style>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  <!--[if IE]>
+  <style>
+    .showcase {
+       zoom: 0.6;
+    }
+  </style>
+  <![endif]-->
+
+  </head>
+
+  <body>
+
+  <!-- Navbar
+    ============= -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Sails.js Blog</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <!-- Profile links for extra small screens -->
+            <li class="visible-xs"><a href="/login">Sign In</a></li>
+          </ul>
+          <!-- Search form for extra small screens -->
+          <ul class="nav navbar-nav navbar-right hidden-xs">
+            <% if (!session.user) { %>
+            <!-- Sign in & Sign up -->
+            <li id="sign-in" class="show"><a href="/login">Sign In</a></li>
+            <!-- Signed in. Profile Menu -->
+            <li id="cogs-menu" class="hidden">
+              <a href="edit-profile.html">
+                <i class="fa fa-gears fa-lg"></i>
+              </a>
+            </li>
+            <% } else { %>
+            <li id="profile-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrator <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="account">
+                  <div class="avatar"></div>
+                  <p><b>Administrator</b><br /></p>
+                  <p><a href="/logout" id="sign-out">Sign out</a></p>
+                  <div class="clearfix"></div>
+                </li>
+              </ul>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include the view file for the current controller/route -->
+    <%- body %>
+
+    <!-- Foooter
+    ================== -->
+      <footer>
+
+      </footer>
+
+      <br />
+      <!-- Legal 
+      ============= -->
+      <div class="legal">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <p>&copy; Sails.js Blog</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can import any js files in your `assets` directory as you would 
+      normally: using <script></script> tags.
+
+      Here's an example of importing a few dependencies, in order:
+    -->
+    <!-- Bring in the socket.io client -->
+    <script type="text/javascript" src="/js/socket.io.js"></script>
+    <!-- then beef it up with some convenience logic for talking to Sails.js -->
+    <script type="text/javascript" src="/js/sails.io.js"></script>
+    <!-- listen on socket.io for incoming messages -->
+    <script type="text/javascript" src="/js/app.js"></script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/scrolltopcontrol.js"></script><!-- Scroll to top javascript -->
+
+    </body>
+</html>

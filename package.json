@@ -1,0 +1,29 @@
+{
+  "name": "Sails.js Blog",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "dependencies": {
+    "sails": "0.9.8",
+    "grunt": "0.4.1",
+    "sails-disk": "~0.9.0",
+    "ejs": "0.8.4",
+    "optimist": "0.3.4",
+    "sendgrid": "~1.0.2",
+    "sails-mongo": "~0.9.7",
+    "bcrypt": "~0.7.7",
+    "moment": "~2.5.1",
+    "request": "~2.34.0",
+    "feedparser": "~0.16.6",
+    "async": "~0.2.10",
+    "marked": "^0.3.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "debug": "node debug app.js"
+  },
+  "main": "app.js",
+  "repository": "",
+  "author": "",
+  "license": ""
+}

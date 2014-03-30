@@ -1,0 +1,89 @@
+<!-- Main body
+================== -->
+  <div class="wrapper">
+    <div class="section-header">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-sm-12">
+		    <!-- Remove the .animated class if you don't want things to move -->
+			<h1 class="animated slideInLeft"><span>Blog Post</span></h1>
+		  </div>
+		</div>
+	  </div>
+    </div>
+	<div class="container">
+	  <div class="row">
+	    <div class="col-sm-8">
+		  <!-- Blog Post -->
+		  <h4><%= post.title %></h4>
+		  <ul class="text-muted list-inline">
+			<li><i class="fa fa-user"></i> Administrator</li>
+			<li><i class="fa fa-calendar"></i><%= post.createdAtDate %></li>
+		  </ul>
+		  <hr>
+		  <p class="blog-text">
+		    <%- post.body %>
+		  </p>
+
+		</div>
+		<div class="col-sm-4">
+		  <!-- Social Links -->
+<!-- 		  <h3 class="hl">Bookmark</h3>
+		  <hr>
+		  <div class="social-icons social-icons-default">
+			<ul>
+				<li class="rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+				<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+				<li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+				<li class="github"><a href="#"><i class="fa fa-github"></i></a></li>
+				<li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+				<li class="vk"><a href="#"><i class="fa fa-vk"></i></a></li>
+				<li class="plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+				<li class="dropbox"><a href="#"><i class="fa fa-dropbox"></i></a></li>
+				<li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		  </div> -->
+
+		  <!-- Tags -->
+		  <% if(post.tags && post.tags.length > 0) { %>
+			  <h3 class="hl">Story tags</h3>
+			  <hr>
+			  <p class="tags">
+			    <% _.each(post.tags, function(tag){ %>
+			    	<a href="/blog/tags/<%= tag %>"><%= tag %></a>
+			    <% }); %>	
+			  </p>
+		  <% } else { %>
+			  <h3 class="hl">Popular tags</h3>
+			  <hr>
+			  <p class="tags">
+			    <% _.each(tags, function(tag){ %>
+			    	<a href="/blog/tags/<%= tag %>"><%= tag %></a>
+			    <% }); %>	
+			  </p>
+		  <% } %>
+
+		  <br />
+		  
+		  <!-- Recently Added -->
+		  <div class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title">Recently Added</h3>
+			</div>
+			<div class="panel-body">
+			  <div class="recent-blogs">
+			    <ul>
+			      <% _.each(mostrecent, function(post, index){ %>
+				  	<li><a href="<%= post.link %>" class="<% if(index == 0){ %>new-story<% } %>"><%= post.title %></a></li>
+			      <% }); %>
+				</ul>
+			  </div>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+	</div>
+  </div>

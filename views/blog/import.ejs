@@ -1,0 +1,39 @@
+<!-- Main body
+================== -->
+  <div class="wrapper">
+    <div class="section-header">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-12">
+		    <!-- Remove the .animated class if you don't want things to move -->
+			<h1 class="animated slideInLeft"><span>Blog</span></h1>
+		  </div>
+		</div>
+	  </div>
+    </div>
+	<div class="container">
+	  <div class="row">
+
+		<%  _.each(flash, function(message, type){ %>
+			<div class="alert alert-<%= type %>"><%= message %></div>
+		<% }); %>
+
+	    <!-- Contact us form -->
+		<div class="col-sm-6">
+		  <h2 class="hl top-zero">Import RSS</h2>
+		  <hr>
+		
+			<form role="form" action="/blog/import" method="POST">
+			  <div class="form-group">
+				<label for="feed">RSS Feed</label>
+				<input type="text" class="form-control" id="feed" placeholder="Enter feed URL" name="feed" />
+			  </div>
+			  <input type='hidden' name='_csrf' value='<%= _csrf %>' />
+			  <button type="submit" class="hl-btn hl-btn-green">Import</button>
+			</form>
+	
+		</div>
+
+	  </div>
+	</div>
+  </div>

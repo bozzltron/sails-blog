@@ -1,0 +1,228 @@
+<!-- Main body
+================== -->
+  <div class="wrapper">
+    <div class="section-header">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-sm-12">
+		    <!-- Remove the .animated class if you don't want things to move -->
+			<% if(tag) { %>
+			<div>
+				<h1 class="animated slideInLeft"><a href="/blog/">Blog</a> > <span><%= tag %></span></h1>
+			</div>
+			<% } else { %>		    
+				<h1 class="animated slideInLeft"><span>Blog</span></h1>
+			<% } %>
+		  </div>
+		</div>
+	  </div>
+    </div>
+	<div class="container">
+	  <div class="row">
+
+		<%  _.each(flash, function(message, type){ %>
+			<div class="alert alert-<%= type %>"><%= message %></div>
+		<% }); %>
+
+	    <div class="col-sm-8">
+		  <div class="timeline-block">
+		 
+		  <% _.each(posts, function(post) { %>
+
+		    <div class="blog-summary">
+			  <h4><a href="<%= post.link %>"><%= post.title %></a></h4>
+			  <% if(session.user) { %>
+				  <div class="pull-right">
+					  <a href="/blog/edit/<%= post.id %>"><span class="glyphicon glyphicon-pencil"></span> Edit</a>&nbsp;&nbsp;
+					  <a class="link-delete" href="#" data-id="<%= post.id %>" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-remove-circle"></span> Delete</a>
+				  </div>
+			  <% } %>
+			  <time datetime="2013-11-10" class="timestamp hidden-xs"><%= post.createAtShortDate %></time>
+			  <ul class="text-muted list-inline">
+				<li><i class="fa fa-user"></i> <a href="profile.html">Administrator</a></li>
+				<li><i class="fa fa-calendar"></i> <%= post.createdAtDate %></li>
+			  </ul>
+			  <hr>
+			  <p class="blog-summary-text">
+				<%- post.body %> 
+			  </p>
+
+			  <p class="tags">
+			    <% if(post.tags) { %>
+			    <% _.each(post.tags, function(tag){ %>
+			    	<a href="/blog/tags/<%= tag %>"><%= tag %></a>
+			    <% }); %>
+			    <% } %>
+			  </p>
+		    </div>
+
+		    <% }); %>
+
+		  </div>
+
+		  <!-- Small modal -->
+			<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-sm">
+				<div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			          <h4 class="modal-title" id="myModalLabel">Delete Blog</h4>
+			        </div>
+			        <div class="modal-body">
+			        	<p>Are you sure you want to delete this blog?</p>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="hl-btn hl-btn-default" data-dismiss="modal">Cancel</button>
+			          <a href="/blog/delete" class="hl-btn hl-btn-red btn-delete">Delete</a>
+			        </div>
+
+			    </div>
+			  </div>
+			</div>
+
+		  <!-- Pagination -->
+<!-- 		  <ul class="pagination pull-right">
+			<li class="disabled"><a href="#">&laquo;</a></li>
+			<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">&raquo;</a></li>
+		  </ul> -->
+		</div>
+		<div class="col-sm-4">
+
+		  <% if(session.user) { %>
+		  	<a class="btn btn-primary" href="/blog/create">Create Blog</a>
+		  <% } %>
+
+		  <!-- Social Links -->
+<!-- 		  <h3 class="hl">Bookmark</h3>
+		  <hr>
+		  <div class="social-icons social-icons-default">
+			<ul>
+				<li class="rss"><a href="#"><i class="fa fa-rss"></i></a></li>
+				<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+				<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+				<li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+				<li class="github"><a href="#"><i class="fa fa-github"></i></a></li>
+				<li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+				<li class="vk"><a href="#"><i class="fa fa-vk"></i></a></li>
+				<li class="plus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+				<li class="dropbox"><a href="#"><i class="fa fa-dropbox"></i></a></li>
+				<li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+			</ul>
+			<div class="clearfix"></div>
+		  </div> -->
+		  
+		  <!-- Tags -->
+		  <h3 class="hl">Popular Tags</h3>
+		  <hr>
+		  <p class="tags">
+		    <% _.each(tags, function(tag){ %>
+		    	<a href="/blog/tags/<%= tag %>"><%= tag %></a>
+		    <% }); %>		  
+		  </p>
+		  <br />
+
+		  <!-- Recently Added -->
+		  <div class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title">Recently Added</h3>
+			</div>
+			<div class="panel-body">
+			  <div class="recent-blogs">
+			    <ul>
+			      <% _.each(mostrecent, function(post, index){ %>
+				  	<li><a href="<%= post.link %>" class="<% if(index == 0){ %>new-story<% } %>"><%= post.title %></a></li>
+			      <% }); %>
+				</ul>
+			  </div>
+			</div>
+		  </div>
+
+		  
+		  <!-- Archive -->
+<!-- 		  <div class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title">Archive</h3>
+			</div>
+			<div class="panel-body">
+			  <div class="row">
+			    <div class="col-xs-12">
+			      <!-- Years 
+				  <ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#2013" data-toggle="tab">2013</a></li>
+					<li><a href="#2012" data-toggle="tab">2012</a></li>
+					<li><a href="#2011" data-toggle="tab">2011</a></li>
+				  </ul>
+				</div>
+			  </div>
+			  <div class="row">
+				<div class="col-xs-12">
+				  <!-- Months 
+				  <div class="tab-content blog-months">
+					<div class="tab-pane active" id="2013">
+					  <ul class="nav nav-pills nav-stacked pull-left">
+						<li><a href="#">Jan <span class="badge">15</span></a></li>
+						<li><a href="#">Feb <span class="badge">23</span></a></li>
+						<li><a href="#">Mar <span class="badge">45</span></a></li>
+						<li><a href="#">Apr <span class="badge">12</span></a></li>
+						<li><a href="#">May <span class="badge">10</span></a></li>
+						<li><a href="#">Jun <span class="badge">9</span></a></li>
+					  </ul>
+					  <ul class="nav nav-pills nav-stacked pull-left">
+						<li><a href="#">Jul <span class="badge">14</span></a></li>
+						<li><a href="#">Aug <span class="badge">19</span></a></li>
+						<li><a href="#">Sep <span class="badge">32</span></a></li>
+						<li><a href="#">Oct <span class="badge">23</span></a></li>
+						<li><a href="#">Nov <span class="badge">8</span></a></li>
+						<li><a href="#">Dec <span class="badge">9</span></a></li>
+					  </ul>
+					</div>
+					<div class="tab-pane" id="2012">
+					  <ul class="nav nav-pills nav-stacked pull-left">
+						<li><a href="#">Jan <span class="badge">10</span></a></li>
+						<li><a href="#">Feb <span class="badge">13</span></a></li>
+						<li><a href="#">Mar <span class="badge">5</span></a></li>
+						<li><a href="#">Apr <span class="badge">21</span></a></li>
+						<li><a href="#">May <span class="badge">12</span></a></li>
+						<li><a href="#">Jun <span class="badge">12</span></a></li>
+					  </ul>
+					  <ul class="nav nav-pills nav-stacked pull-left">
+						<li><a href="#">Jul <span class="badge">19</span></a></li>
+						<li><a href="#">Aug <span class="badge">16</span></a></li>
+						<li><a href="#">Sep <span class="badge">17</span></a></li>
+						<li><a href="#">Oct <span class="badge">9</span></a></li>
+						<li><a href="#">Nov <span class="badge">13</span></a></li>
+						<li><a href="#">Dec <span class="badge">12</span></a></li>
+					  </ul>
+					</div>
+					<div class="tab-pane" id="2011">
+					  <ul class="nav nav-pills nav-stacked pull-left">
+						<li><a href="#">Jan <span class="badge">13</span></a></li>
+						<li><a href="#">Feb <span class="badge">22</span></a></li>
+						<li><a href="#">Mar <span class="badge">12</span></a></li>
+						<li><a href="#">Apr <span class="badge">14</span></a></li>
+						<li><a href="#">May <span class="badge">11</span></a></li>
+						<li><a href="#">Jun <span class="badge">19</span></a></li>
+					  </ul>
+					  <ul class="nav nav-pills nav-stacked pull-left">
+						<li><a href="#">Jul <span class="badge">16</span></a></li>
+						<li><a href="#">Aug <span class="badge">18</span></a></li>
+						<li><a href="#">Sep <span class="badge">31</span></a></li>
+						<li><a href="#">Oct <span class="badge">22</span></a></li>
+						<li><a href="#">Nov <span class="badge">23</span></a></li>
+						<li><a href="#">Dec <span class="badge">11</span></a></li>
+					  </ul>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div> -->
+		</div>
+	  </div>
+	</div>
+  </div>
