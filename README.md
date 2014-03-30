@@ -1,2 +1,6 @@
-# loftusheatingandac.com
-### a Sails application
+=======
+sails-blog
+==========
+
+An heroku ready blogging engine built with sails.js
+
